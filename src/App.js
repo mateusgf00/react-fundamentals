@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, createContext } from 'react';
 import Post from './Post';
 import Header from './Header';
 
+export const ThemeContext = createContext('dark');
+
 function App() {
+  const [theme, setTheme] = useState('dark');
+
   const [posts, setPosts] = useState([
     { id: Math.random(), title: 'Title#01', subtitle: 'Sub#01', likes: 20, read: false },
     { id: Math.random(), title: 'Title#02', subtitle: 'Sub#02', likes: 10, read: true },
@@ -10,6 +14,9 @@ function App() {
     { id: Math.random(), title: 'Title#04', subtitle: 'Sub#04', likes: 50, read: false },
   ]);
 
+  function handleToogleTheme(){
+    setTheme((prevState) => prevState === 'dark' ? 'light' : 'dark');
+  }
 
   function handleRefresh() {
     setPosts((prevState) => [
@@ -34,8 +41,10 @@ function App() {
   }
 
   return (
-    <>
-      <Header title="JStack's Blog">
+    <ThemeContext.Provider value={theme}>
+      <Header 
+      title="JStack's Blog"
+      onToggleTheme={handleToogleTheme}>
         <h2>
           Posts da semana
           <button onClick={handleRefresh}>Atualizar</button>
@@ -50,7 +59,7 @@ function App() {
           post={post}
         />
       ))}
-    </>
+    </ThemeContext.Provider>
   );
 }
 
