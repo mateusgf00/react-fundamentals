@@ -20,7 +20,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude:/node_modules/,
+        exclude: /node_modules/,
         use: 'babel-loader',
       },
       {
@@ -34,11 +34,24 @@ module.exports = {
             }
           }
         ],
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            }
+          },
+          'sass-loader',
+        ],
       }
     ]
   },
 
-  devServer:{
-    port:3000,
+  devServer: {
+    port: 3000,
   }
 };
