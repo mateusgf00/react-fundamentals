@@ -1,6 +1,7 @@
 import React from 'react';
 import PostHeader from './PostHeader';
 
+import { Subtitle, Rate } from './styles';
 import styles from './Post.scss';
 
 function Post(props) {
@@ -17,10 +18,8 @@ function Post(props) {
           read: props.post.read,
         }}
       />
-      <br />
-      <small>{props.post.subtitle}</small>
-      <br />
-      <small>{props.post.likes}</small>
+      <Subtitle>{props.post.subtitle}</Subtitle>
+      <Rate> Media: {props.post.likes}</Rate>
     </article>
 
   )
